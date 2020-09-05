@@ -1,8 +1,6 @@
 """
-File Name: marthint_hw1p2ext.py
 Name: Tiffany Marthin
 Last Modified: 4/10/2020
-Summary: Individual Programming 1 Part 2
 Goal: Create a program that prompts user for a category of things and things to put
 in the list. It will then perform various interactive questions and responses. This extension
 will have additional prompts for the users to select how many items the user wants in the list.
