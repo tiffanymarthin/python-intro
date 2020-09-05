@@ -1,0 +1,139 @@
+"""
+File Name: marthint_final_ext.py
+Name: Tiffany Marthin
+Last Modified: 6/6/2020
+Summary: Final Programming Assignment Extension
+Goal: Scrape vocabularies from the classicshorts.com website based on
+the story that's selected by the user. The user will be able to update the
+definition of the vocabs and save the file as a text file.
+This extension has two additional features: deleting vocab from the dictionary
+and request for general information of the current vocab list including
+printing out the current content.
+"""
+
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
+
+
+"""
+Asking user for the short story path from classicshorts.com.
+Ensures that the path exists, or else program ends
+"""
+
+
+try:
+    story_path = input("What's the short story path? ")
+    url = "https://www.classicshorts.com/stories/" + story_path + ".html"
+    response = urlopen(url)
+except:
+    print("Short story not found.", end = " ")
+
+
+"""
+Parse the prompted story and find all story paragraphs
+"""
+
+
+story = BeautifulSoup(response, 'html.parser')
+all_para = story.findAll("div", {"class":"StoryPara"})
+
+
+"""
+Store the vocabularies found in the story by finding the 
+words with hyperlinks to dictionary.com, then return
+to user how many unique vocabulary words is there.
+"""
+
+
+vocabs = {}
+for div in all_para:
+    for v in div.findAll("a"):
+        if "http://dictionary.reference.com/browse/" in v.get('href'):
+            vocabs[v.text] = ""
+
+print("Short story found. There are " + str(len(vocabs)) + " unique vocabulary words.")
+
+
+"""
+Method to count the term in vocab dictionaries with definition.
+This will be used to update user of the general status of dictionary
+"""
+
+
+def count_def(dict):
+    def_ct = 0
+    for v in enumerate(dict.values()):
+        if v[1] != "":
+            def_ct += 1
+    return def_ct
+
+
+"""
+User will be able to choose from 3 options:
+ 1. See the general info of the vocab list including the vocabs
+ 2. Update the definition of the vocabularies
+ 3. Delete the vocab 
+The program tells user of the existing definition if exists.
+"""
+
+
+while True:
+    option = eval(input("Please select any option below (1,2,3): "
+                   "\n1. See content and general information" 
+                   "\n2. Update definition "
+                   "\n3. Delete vocab "
+                   "\n"))
+    if option == 1:
+        for i, (k, v) in enumerate(vocabs.items()):
+            print(k, " : ", v)
+        print("Unique vocabularies: ", len(vocabs))
+        print("Filled definitions: ", count_def(vocabs))
+        print("Empty definitions: ", len(vocabs) - count_def(vocabs))
+    elif option == 2:
+        term = input("Term: ")
+        if term in vocabs and vocabs[term] != "":
+            print("WARNING! " + term + " is currently defined as '" + vocabs[term] + "'")
+        if term in vocabs:
+            vocabs[term] = input("Definition: ")
+        else:
+            print("ERROR! Term not found.")
+    elif option == 3:
+        term = input("Term: ")
+        if term in vocabs:
+            vocabs.pop(term)
+            print(term + " has successfully been deleted.")
+        else:
+            print("ERROR! Term not found.")
+    else:
+        break
+
+
+"""
+User will be able to save the list of term and definition in a form of text file
+"""
+
+
+file_name = input("What would you like to save the file as? ")
+new_file = open(file_name, 'w')  # ensure the file starts with blank sheet
+new_file.close()
+new_file = open(file_name, 'a')  # append mode so the loop below will append each vocab
+
+"""
+Loop to get the longest term in Vocabs dictionary
+"""
+max_term = 0
+for term in vocabs:
+    term_length = len(term)
+    max_term = max(max_term, term_length)
+
+"""
+This for loop will write each vocabulary in the text file with pre-determined formatting 
+"""
+for v in vocabs:
+    vocab = '{0:<{vlen}} - {1:<}'.format(v, vocabs[v], vlen=max_term)
+    new_file.write(vocab)
+    new_file.write("\n")   # new line after each record
+
+new_file.close()   # close file for best practices
+
+print("File saved!")
