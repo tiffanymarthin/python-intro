@@ -1,8 +1,6 @@
 """
-File Name: marthint_hw1p1ext.py
 Name: Tiffany Marthin
 Last Modified: 4/11/2020
-Summary: Individual Programming 1 Part 1 Extension
 Goal: Create a program that ask for two numbers from user and prompt the user
       to choose which mathematical functions the user wants to execute
 """
