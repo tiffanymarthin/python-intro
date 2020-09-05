@@ -1,10 +1,7 @@
 """
-File Name: marthint_hw3p2ext.py
 Name: Tiffany Marthin
 Last Modified: 5/10/2020
-Summary: Individual Programming 3 Part 2 Extension
 Goal: Create a program that reads a vocablist text file of which the user could input
-more terms and definitions to the (dictionary) file. This extension will have additional features:
 more terms and definitions to the (dictionary) file. This extension will have additional features:
     1. It will catch possible input errors for other user prompt questions (Y/N questions)
     2. It will add a feature of asking user what options to choose (save file, search for a term, or delete a term)
