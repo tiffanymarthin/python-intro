@@ -1,8 +1,6 @@
 """
-File Name: marthint_hw3p2ext.py
 Name: Tiffany Marthin
 Last Modified: 5/27/2020
-Summary: Individual Programming 4
 Goal: Create a multi-players simple game for up to 8 people. The goal is to defeat
 the boss who spawn minions to attack the players. Each character has the ability to
 attack, charge (increase the damage of next attack) and defense (being protected for the
