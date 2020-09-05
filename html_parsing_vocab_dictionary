@@ -1,8 +1,6 @@
 """
-File Name: marthint_final_ext.py
 Name: Tiffany Marthin
 Last Modified: 6/6/2020
-Summary: Final Programming Assignment Extension
 Goal: Scrape vocabularies from the classicshorts.com website based on
 the story that's selected by the user. The user will be able to update the
 definition of the vocabs and save the file as a text file.
