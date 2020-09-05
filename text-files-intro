@@ -1,8 +1,6 @@
 """
-File Name: marthint_hw2p2.py
 Name: Tiffany Marthin
 Last Modified: 4/29/2020
-Summary: Individual Programming 2 Part 2
 Goal: Create a program that will read a roster_extended.csv file and prompt user
 to enter more names with other information to be added to the file. Then save the
 csv file into a text file with some formatting.
